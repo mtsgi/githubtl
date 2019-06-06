@@ -1,0 +1,46 @@
+main{
+    max-width: 800px;
+    margin: 0px auto;
+    background: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+kit-box{
+    text-align: left;
+    background: #ffffff;
+}
+
+kit-box:hover{
+    background: #f0f0f0;
+}
+
+kit-box img{
+    float: left;
+    height: 46px;
+    width: 46px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background: #c0c0c0;
+}
+
+kit-box span{
+    float: right;
+}
+
+a{
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+#loading{
+    display: none;
+}
+
+.textbox{
+    max-width: 90%;
+}

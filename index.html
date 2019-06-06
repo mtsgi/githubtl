@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GithubTL</title>
+    <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap.css">
+    <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap-font.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="./jquery.min.js"></script>
+    <script src="./githubtl.js"></script>
+</head>
+
+<body>
+    <main>
+        <h2>GitHubのTLを見るやつ</h2>
+        <kit-header id="loading">Now Loading...</kit-header>
+        <div class="kit-small">GitHubのユーザー名を入力すると、そのユーザーのタイムラインを表示することができます。</div>
+        <kit-space></kit-space>
+        <input type="text" class="textbox" id="username" autocomplete="off" placeholder="username">
+        <kit-button onclick="load()">TLを見る</kit-button>
+        <kit-space></kit-space>
+        <kit-container id="tlarea"></kit-container>
+    </main>
+</body>
+
+</html>
