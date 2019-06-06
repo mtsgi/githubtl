@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>GithubTL</title>
+    <title>Github TL Viewer</title>
     <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap.css">
     <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap-font.css">
     <link rel="stylesheet" href="style.css">
@@ -17,7 +17,10 @@
     <main>
         <h2>GitHubのTLを見るやつ</h2>
         <kit-header id="loading">Now Loading...</kit-header>
-        <div class="kit-small">GitHubのユーザー名を入力すると、そのユーザーのタイムラインを表示することができます。</div>
+        <div class="kit-small">
+            GitHubのユーザー名を入力すると、そのユーザーのタイムラインを表示することができます。<br>
+            TL上のユーザー名をクリックすると、そのユーザーのTLを表示します。
+        </div>
         <kit-space></kit-space>
         <input type="text" class="textbox" id="username" autocomplete="off" placeholder="username">
         <kit-button onclick="load()">TLを見る</kit-button>

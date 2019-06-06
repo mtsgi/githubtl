@@ -29,6 +29,7 @@ kit-box span{
 }
 
 a{
+    cursor: pointer;
     color: #000000;
     text-decoration: none;
 }
