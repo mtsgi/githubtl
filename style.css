@@ -1,21 +1,20 @@
-main{
+main {
     max-width: 800px;
     margin: 0px auto;
-    background: #f0f0f0;
     padding: 20px;
     text-align: center;
 }
 
-kit-box{
+kit-box {
     text-align: left;
     background: #ffffff;
 }
 
-kit-box:hover{
+kit-box:hover {
     background: #f0f0f0;
 }
 
-kit-box img{
+kit-box img {
     float: left;
     height: 46px;
     width: 46px;
@@ -24,24 +23,28 @@ kit-box img{
     background: #c0c0c0;
 }
 
-kit-box span{
+kit-box span {
     float: right;
 }
 
-a{
+a {
     cursor: pointer;
     color: #000000;
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
 
-#loading{
+#loading {
     display: none;
 }
 
-.textbox{
-    max-width: 90%;
+kit-formgroup .textbox {
+    max-width: calc(100% - 90px);
+}
+
+kit-formgroup kit-button {
+    min-width: 90px;
 }
