@@ -27,20 +27,6 @@ kit-box span {
     float: right;
 }
 
-a {
-    cursor: pointer;
-    color: #000000;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-#loading {
-    display: none;
-}
-
 kit-formgroup .textbox {
     max-width: calc(100% - 90px);
 }
