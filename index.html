@@ -2,32 +2,82 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Github TL Viewer</title>
-    <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap.css">
-    <link rel="stylesheet" href="https://mtsgi.github.io/kitstrap/d/kitstrap-font.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="./jquery.min.js"></script>
-    <script src="./githubtl.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Github TL Viewer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtsgi/kitstrap/d/0.5/kitstrap.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtsgi/kitstrap/d/0.5/kitstrap-font.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <main>
-        <h2>GitHub TL Viewer</h2>
-        <div class="kit-small">
-            GitHubのユーザー名を入力すると、そのユーザーのタイムラインを表示することができます。<br>
-            TL上のユーザー名をクリックすると、そのユーザーのTLを表示します。
-        </div>
-        <kit-notice id="loading">Now Loading...</kit-notice>
-        <kit-formgroup class="m-t p kit-flex-center">
-            <input type="text" class="textbox -flat" id="username" autocomplete="off" placeholder="username">
-            <kit-button onclick="load()" class="-flat">TLを見る</kit-button>
-        </kit-formgroup>
-        <kit-space></kit-space>
-        <kit-container id="tlarea"></kit-container>
-    </main>
+  <main>
+    <h2>GitHub TL Viewer</h2>
+
+    <div>
+      GitHubのユーザー名を入力すると、そのユーザーのタイムラインを表示できます。
+    </div>
+
+    <kit-notice kit:if="loading">Now Loading...</kit-notice>
+
+    <kit-formgroup class="m-t p kit-flex-center">
+      <input type="text" class="textbox -flat" autocomplete="off" placeholder="username" kit:bind="username">
+      <kit-button kit-e="load" class="-flat">TLを見る</kit-button>
+    </kit-formgroup>
+
+    <kit-space></kit-space>
+
+    <kit-container id="tlarea"></kit-container>
+  </main>
+
+  <footer class="p-l m-t-l kit-bgclr-silver">
+    <p>
+      This app is built with <a class="kit-hl" href="https://github.com/mtsgi/kafjs" target="_blank"
+        rel="noopener noreferrer">kaf.js</a> !
+    </p>
+  </footer>
 </body>
+
+<script type="module">
+  import Kaf from 'https://mtsgi.github.io/kafjs/kaf.js';
+  const kaf = new Kaf({
+    elem: 'main',
+    data: {
+      loading: false
+    },
+    events: {
+      load() {
+        this.loading = true;
+        fetch(`https://api.github.com/users/${this.username}/received_events`)
+          .then(res => {
+            if(res.ok) return res.json();
+            else {
+              this.loading = false;
+              document.querySelector('#tlarea').textContent = "Failed to load.";
+              return [];
+            }
+          })
+          .then(data => {
+            document.querySelector('#tlarea').textContent = "";
+            for(const ev of data) {
+              document.querySelector('#tlarea').insertAdjacentHTML('beforeend',
+                `<kit-box>
+                    <img src="${ev.actor.avatar_url}" alt="${ev.actor.login}" />
+                    <span class="kit-sub">${ev.created_at}</span>
+                    <strong class="loaduser">
+                      <a>${ev.actor.login}</a>
+                    </strong> : ${ev.type}
+                    <div class="kit-small">
+                      <a class="kit-hl" href="https://github.com/${ev.repo.name}">${ev.repo.name}</a>
+                    </div>
+                  </kit-box>`);
+            }
+            this.loading = false;
+          });
+      }
+    }
+  });
+</script>
 
 </html>
